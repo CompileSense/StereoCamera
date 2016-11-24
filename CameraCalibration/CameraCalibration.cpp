@@ -88,7 +88,7 @@ void outputCameraParam(void)
 {
 	/*保存数据*/
 	/*输出数据*/
-	FileStorage fs("Output/intrinsics.yml", FileStorage::WRITE);
+	FileStorage fs("../StereoCamera/data/intrinsics.yml", FileStorage::WRITE);
 	if (fs.isOpened())
 	{
 		fs << "cameraMatrixL" << cameraMatrixL << "cameraDistcoeffL" << distCoeffL << "cameraMatrixR" << cameraMatrixR << "cameraDistcoeffR" << distCoeffR;
@@ -100,7 +100,7 @@ void outputCameraParam(void)
 		cout << "Error: can not save the intrinsics!!!!!" << endl;
 	}
 
-	fs.open("Output/extrinsics.yml", FileStorage::WRITE);
+	fs.open("../StereoCamera/data/extrinsics.yml", FileStorage::WRITE);
 	if (fs.isOpened())
 	{
 		fs << "R" << R << "T" << T << "Rl" << Rl << "Rr" << Rr << "Pl" << Pl << "Pr" << Pr << "Q" << Q;

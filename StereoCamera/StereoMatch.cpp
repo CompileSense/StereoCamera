@@ -20,7 +20,7 @@ using namespace std;
 
 static void saveXYZ(const char* filename, const Mat& mat)
 {
-	const double max_z = 1.0e4;
+	const double max_z = 0.1e3;
 	FILE* fp = fopen(filename, "wt");
 	for (int y = 0; y < mat.rows; y++)
 	{
@@ -41,7 +41,7 @@ int main()
 	const char* extrinsic_filename = "data/extrinsics.yml";
 	Rect roi1, roi2;
 	Mat Q;
-	float scale = 0.5;
+	float scale = 0.7;
 
 	// 从data文件中读取标定参数
 	FileStorage fs(intrinsic_filename, FileStorage::READ);
@@ -70,7 +70,7 @@ int main()
 	int alg = 1;
 
 	//匹配参数
-	int SADWindowSize = 3, numberOfDisparities = 128;
+	int SADWindowSize = 3, numberOfDisparities =128;
 	////////////////////5////////////////////////256/
 	bool no_display = false;
 
@@ -84,12 +84,13 @@ int main()
 	VideoCapture capright(0);
 
 	cout << "Press Q to quit the program" << endl;
-
+	double d = 5;
 	while (1)
 	{
 		capleft >> left;
 		capright >> right;
-
+		//GaussianBlur(left, left, Size(7, 7), d, d);
+		//GaussianBlur(right, right, Size(7, 7), d, d);
 		//左上图像画到画布上
 		//得到画布的一部分 
 		Mat canvasPart = canvas(Rect(0, 0, w, h));
@@ -145,6 +146,7 @@ int main()
 		//显示运行时间
 		int64 t = getTickCount();
 		sgbm->compute(img1, img2, disp);
+		//medianBlur(disp, disp, 9);
 		t = getTickCount() - t;
 		cout << "Time elapsed: " << t * 1000 / getTickFrequency() << "ms" << endl;
 
@@ -207,8 +209,9 @@ int main()
 
 			printf("storing the point cloud...");
 			Mat xyz;
+			//medianBlur(disp, disp, 5);
 			reprojectImageTo3D(disp, xyz, Q, true);
-			saveXYZ("pointcloud.yml", xyz);
+			saveXYZ("pointcloud.txt", xyz);
 			printf("\n");
 		};
 		if (cvWaitKey(10) == 'q')

@@ -117,6 +117,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraCalibration.cpp" />
+    <ClCompile Include="SoloCalibration.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SoloCalibration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

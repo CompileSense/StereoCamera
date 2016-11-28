@@ -1,12 +1,12 @@
 //Ë«Ä¿ÉãÏñÍ·Á¢Ìå±ê¶¨
-//°æ±¾£ºVersion 2.0.1
+//°æ±¾£ºVersion 2.1.0
 //ÏÈ¶ÔÁ½¸öÉãÏñÍ·½øĞĞµ¥¶À±ê¶¨£¬È»ºóÔÚ½øĞĞÁ¢Ìå±ê¶¨²¢Éú³ÉÏàÓ¦ymlÎÄ¼ş
 #include <opencv2/opencv.hpp>  
 #include <highgui.hpp>  
 #include "cv.h"  
 #include <cv.hpp>  
 #include <iostream>  
-
+#include"SoloCalibration.h"
 using namespace std;
 using namespace cv;
 
@@ -15,14 +15,14 @@ const int imageHeight = 480;
 const int boardWidth = 7;                               //ºáÏòµÄ½ÇµãÊıÄ¿  
 const int boardHeight = 5;                              //×İÏòµÄ½ÇµãÊı¾İ  
 const int boardCorner = boardWidth * boardHeight;       //×ÜµÄ½ÇµãÊı¾İ  
-const int frameNumber = 9;                             //Ïà»ú±ê¶¨Ê±ĞèÒª²ÉÓÃµÄÍ¼ÏñÖ¡Êı  
+const int frameNumber = 5;                             //Ïà»ú±ê¶¨Ê±ĞèÒª²ÉÓÃµÄÍ¼ÏñÕÅÊı  
 const int squareSize = 35;                              //±ê¶¨°åºÚ°×¸ñ×ÓµÄ´óĞ¡ µ¥Î»mm  
 const Size boardSize = Size(boardWidth, boardHeight);   //  
 Size imageSize = Size(imageWidth, imageHeight);
 
 Mat R, T, E, F;                                         //R Ğı×ªÊ¸Á¿ TÆ½ÒÆÊ¸Á¿ E±¾Õ÷¾ØÕó F»ù´¡¾ØÕó  
-vector<Mat> rvecs;                                        //Ğı×ªÏòÁ¿  
-vector<Mat> tvecs;                                        //Æ½ÒÆÏòÁ¿  
+//vector<Mat> rvecs;                                        //Ğı×ªÏòÁ¿  
+//vector<Mat> tvecs;                                        //Æ½ÒÆÏòÁ¿  
 vector<vector<Point2f>> imagePointL;                    //×ó±ßÉãÏñ»úËùÓĞÕÕÆ¬½ÇµãµÄ×ø±ê¼¯ºÏ  
 vector<vector<Point2f>> imagePointR;                    //ÓÒ±ßÉãÏñ»úËùÓĞÕÕÆ¬½ÇµãµÄ×ø±ê¼¯ºÏ  
 vector<vector<Point3f>> objRealPoint;                   //¸÷¸±Í¼ÏñµÄ½ÇµãµÄÊµ¼ÊÎïÀí×ø±ê¼¯ºÏ  
@@ -38,32 +38,22 @@ Mat Rl, Rr, Pl, Pr, Q;                                  //Ğ£ÕıĞı×ª¾ØÕóR£¬Í¶Ó°¾ØÕ
 Mat mapLx, mapLy, mapRx, mapRy;                         //Ó³Éä±í  
 Rect validROIL, validROIR;                              //Í¼ÏñĞ£ÕıÖ®ºó£¬»á¶ÔÍ¼Ïñ½øĞĞ²Ã¼ô£¬ÕâÀïµÄvalidROI¾ÍÊÇÖ¸²Ã¼ôÖ®ºóµÄÇøÓò  
 
-														/*
-														ÊÂÏÈ±ê¶¨ºÃµÄ×óÏà»úµÄÄÚ²Î¾ØÕó
-														fx 0 cx
-														0 fy cy
-														0 0  1
-														*/
-Mat cameraMatrixL = (Mat_<double>(3, 3) <<
-	820.046, 0, 234.353,
-	0, 820.816, 234.353,
-	0, 0, 1
-	);
-Mat distCoeffL = (Mat_<double>(5, 1) << -0.0175116, 1.2325, -0.000835355, -0.0050405, -8.22484);
-/*
-ÊÂÏÈ±ê¶¨ºÃµÄÓÒÏà»úµÄÄÚ²Î¾ØÕó
-fx 0 cx
-0 fy cy
-0 0  1
+//Ïà»úÄÚ²Î¾ØÕó
+Mat cameraMatrixL;
+Mat distCoeffL;
+Mat cameraMatrixR ;
+Mat distCoeffR ;
 
-*/
-Mat cameraMatrixR = (Mat_<double>(3, 3) <<
-	814.123, 0, 306.948,
-	0, 815.542, 231.294,
-	0, 0, 1
-	);
-Mat distCoeffR = (Mat_<double>(5, 1) << -0.0267209, 2.15388, 0.00272984, 0.00485937, -14.9098);
-
+//¶ÁÈ¡±ê¶¨¾ØÕóº¯Êı
+void ReadCameraparam(void)
+{
+	FileStorage as("../StereoCamera/data/CameraIntrinsicsL.yml", FileStorage::READ);
+	as["cameraMatrixL"] >> cameraMatrixL;
+	as["distCoeffL"] >> distCoeffL;
+	FileStorage bs("../StereoCamera/data/CameraIntrinsicsR.yml", FileStorage::READ);
+	bs["cameraMatrixR"] >> cameraMatrixR;
+	bs["distCoeffR"] >> distCoeffR;
+}
 
 /*¼ÆËã±ê¶¨°åÉÏÄ£¿éµÄÊµ¼ÊÎïÀí×ø±ê*/
 void calRealPoint(vector<vector<Point3f>>& obj, int boardwidth, int boardheight, int imgNumber, int squaresize)
@@ -113,7 +103,9 @@ void outputCameraParam(void)
 
 int main()
 {
-
+	//·Ö±ğµ÷ÊÔ×óÓÒÉãÏñÍ·
+	SoloCalibration();
+	ReadCameraparam();
 	bool isFindL, isFindR;
 
 	Mat canvas;
@@ -121,7 +113,6 @@ int main()
 	w = 320;
 	h = 240;
 	canvas.create(h * 3, w * 2, CV_8UC3);
-
 	Mat left, right;
 
 	int goodFrameCount = 0;

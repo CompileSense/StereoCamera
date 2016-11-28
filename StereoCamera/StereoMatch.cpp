@@ -1,5 +1,5 @@
 //双目匹配
-//版本:Version 2.0.1
+//版本:Version 2.1.0
 //利用双目标定文件对双目摄像头所采得的画面进行匹配并能够输出图像世界坐标
 
 #include "opencv2/calib3d/calib3d.hpp"
@@ -20,7 +20,7 @@ using namespace std;
 
 static void saveXYZ(const char* filename, const Mat& mat)
 {
-	const double max_z = 0.1e3;
+	const double max_z = 0.2e3;
 	FILE* fp = fopen(filename, "wt");
 	for (int y = 0; y < mat.rows; y++)
 	{
@@ -84,13 +84,15 @@ int main()
 	VideoCapture capright(0);
 
 	cout << "Press Q to quit the program" << endl;
-	double d = 5;
+
 	while (1)
 	{
 		capleft >> left;
 		capright >> right;
-		//GaussianBlur(left, left, Size(7, 7), d, d);
-		//GaussianBlur(right, right, Size(7, 7), d, d);
+		//cvtColor(left, left, CV_BGR2GRAY);
+		//cvtColor(right, right, CV_BGR2GRAY);
+		//GaussianBlur(left, left, Size(7, 7), 5, 5);
+		//GaussianBlur(right, right, Size(7, 7), 5, 5);
 		//左上图像画到画布上
 		//得到画布的一部分 
 		Mat canvasPart = canvas(Rect(0, 0, w, h));
@@ -140,7 +142,7 @@ int main()
 		sgbm->setSpeckleWindowSize(100);
 		sgbm->setSpeckleRange(32);
 		sgbm->setDisp12MaxDiff(1);
-		sgbm->setMode(alg == 2 ? StereoSGBM::MODE_HH : StereoSGBM::MODE_SGBM);
+		sgbm->setMode(StereoSGBM::MODE_SGBM);
 
 
 		//显示运行时间

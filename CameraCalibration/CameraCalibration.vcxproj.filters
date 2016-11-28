@@ -18,5 +18,13 @@
     <ClCompile Include="CameraCalibration.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SoloCalibration.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SoloCalibration.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

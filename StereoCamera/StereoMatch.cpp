@@ -1,5 +1,5 @@
 //双目匹配
-//版本:Version 3.0.1
+//版本:Version 3.1.1
 //利用双目标定文件对双目摄像头所采得的画面进行匹配并能够输出图像世界坐标
 //加入特征点提取项目
 //备注：需自行添加模型库和训练结果
@@ -35,7 +35,7 @@ static void saveXYZ(const char* filename, const Mat& mat)
 	fclose(fp);
 }
 
-void detectAndDraw(Mat& img, CascadeClassifier& cascade,
+void detectAndDraw(Mat& inputimg,Mat& dirimg,CascadeClassifier& cascade,
 	CascadeClassifier& nestedCascade,
 	double scale, bool tryflip)
 {
@@ -48,9 +48,9 @@ void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 	//建立缩小的图片，加快检测速度
 	//int cvRound (double value) 对一个double型的数进行四舍五入，并返回一个整型数！
 	Mat gray;
-	Mat smallImg(cvRound(img.rows / scale), cvRound(img.cols / scale), CV_8UC1);
+	Mat smallImg(cvRound(inputimg.rows / scale), cvRound(inputimg.cols / scale), CV_8UC1);
 	//转成灰度图像，Harr特征基于灰度图
-	cvtColor(img, gray, CV_BGR2GRAY);
+	cvtColor(inputimg, gray, CV_BGR2GRAY);
 	//改变图像大小，使用双线性差值
 	resize(gray, smallImg, smallImg.size(), 0, 0, INTER_LINEAR);
 	//变换后的图像进行直方图均值化处理
@@ -91,14 +91,14 @@ void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 		if (0.75 < aspect_ratio && aspect_ratio < 1.3)
 		{
 			//标示人脸时在缩小之前的图像上标示，所以这里根据缩放比例换算回去
-			rectangle(img, cvPoint(cvRound(r->x*scale), cvRound(r->y*scale)), cvPoint(cvRound((r->x + r->width - 1)*scale), cvRound((r->y + r->height - 1)*scale)), color, 2, 8, 0);
+			rectangle(inputimg, cvPoint(cvRound(r->x*scale), cvRound(r->y*scale)), cvPoint(cvRound((r->x + r->width - 1)*scale), cvRound((r->y + r->height - 1)*scale)), color, 2, 8, 0);
 		}
 		else
 		{
 			center.x = cvRound((r->x + r->width*0.5)*scale);
 			center.y = cvRound((r->y + r->height*0.5)*scale);
 			radius = cvRound((r->width + r->height)*0.25*scale);
-			circle(img, center, radius, color, 3, 8, 0);
+			circle(inputimg, center, radius, color, 3, 8, 0);
 		}
 
 		smallImgROI = smallImg(*r);
@@ -111,11 +111,11 @@ void detectAndDraw(Mat& img, CascadeClassifier& cascade,
 		{
 			center.x = cvRound((r->x + p_point->x)*scale);
 			center.y = cvRound((r->y + p_point->y)*scale);
-			circle(img, center, 3, color, 1, 8, 0);
+			circle(dirimg, center, 3, color, 1, 8, 0);
 			p_point++;
 		}
 	}
-	cv::imshow("result", img);
+	cv::imshow("result", dirimg);
 }
 
 int main()
@@ -243,7 +243,7 @@ int main()
 		disp.convertTo(disp8, CV_8U, 255 / (numberOfDisparities*16.));
 		resize(disp8, disp8, canvasPart.size() * 2, 0, 0, INTER_LINEAR);
 		imshow("Deepwindow", disp8);
-		detectAndDraw(left, cascade, nestedCascade, 2, 0);
+		detectAndDraw(left,disp8, cascade, nestedCascade, 2, 0);
 		if (cvWaitKey(10) == 'w')
 		{
 

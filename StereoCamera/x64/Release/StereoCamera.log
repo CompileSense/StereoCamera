@@ -4,9 +4,9 @@ D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/persistence.hpp : war
 D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   正在生成代码
-  41 of 1215 functions ( 3.4%) were compiled, the rest were copied from previous compilation.
+  36 of 1215 functions ( 3.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
+    6 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
 Project1.lib(Facedetect.obj) : warning LNK4099: 未找到 PDB“Project1.pdb”(使用“Project1.lib(Facedetect.obj)”或在“D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Release\Project1.pdb”中寻找)；正在链接对象，如同没有调试信息一样
 Project1.lib(LBF.obj) : warning LNK4099: 未找到 PDB“Project1.pdb”(使用“Project1.lib(LBF.obj)”或在“D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Release\Project1.pdb”中寻找)；正在链接对象，如同没有调试信息一样

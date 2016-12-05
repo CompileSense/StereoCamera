@@ -15,7 +15,7 @@ const int imageHeight = 480;
 const int boardWidth = 7;                               //横向的角点数目  
 const int boardHeight = 5;                              //纵向的角点数据  
 const int boardCorner = boardWidth * boardHeight;       //总的角点数据  
-const int frameNumber = 5;                             //相机标定时需要采用的图像帧数  
+const int frameNumber = 10;                             //相机标定时需要采用的图像帧数  
 const int squareSize = 35;                              //标定板黑白格子的大小 单位mm  
 const Size boardSize = Size(boardWidth, boardHeight);   
 Mat intrinsic;                                          //相机内参数  
@@ -100,22 +100,24 @@ void outputSoloParam(int num)
 	
 	if (num == 0)
 	{
-		FileStorage fs("../StereoCamera/data/CameraIntrinsicsR.yml", FileStorage::WRITE);
+		FileStorage fs("..\\StereoCamera\\data\\CameraIntrinsicsR.yml", FileStorage::WRITE);
 		if (fs.isOpened())
 		{   
 			fs << "cameraMatrixR" << intrinsic << "distCoeffR" << distortion_coeff;
 			fs.release();
+			cout << "Matrix Right write successful!" << endl;
 		}
 		else
 			cout << "Error: can not save the extrinsic parameters\n";
 	}
 	if (num == 1)
 	{
-		FileStorage fs("../StereoCamera/data/CameraIntrinsicsL.yml", FileStorage::WRITE);
+		FileStorage fs("..\\StereoCamera\\data\\CameraIntrinsicsL.yml", FileStorage::WRITE);
 		if (fs.isOpened())
 		{
 			fs << "cameraMatrixL" << intrinsic << "distCoeffL" << distortion_coeff;
 			fs.release();
+			cout << "Matrix Left write successful!" << endl;
 		}
 		else
 			cout << "Error: can not save the extrinsic parameters\n";
@@ -133,7 +135,10 @@ int SoloCalibration()
 		VideoCapture capture(Capturenum);
 		// 检查摄像头打开是否成功
 		if (!capture.isOpened())
+		{
 			return -1;
+			cout << "Fail to open the capture!" << endl;
+		}
 		cout << "Press W to analysis correct frame." << endl << "Press Q to quit the program." << endl;
 
 		int goodFrameCount = 0;
@@ -145,8 +150,9 @@ int SoloCalibration()
 			//从摄像头取得一帧
 			capture >> img;
 
+			//resize(img, img, img.size()/2, 0, 0, INTER_AREA);
 			//显示一帧画面
-			imshow("Capture", img);
+ 			imshow("Capture", img);
 
 			//读取按键W
 			if (cvWaitKey(10) == 'w')

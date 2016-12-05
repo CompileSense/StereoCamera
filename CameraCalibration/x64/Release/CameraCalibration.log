@@ -1,0 +1,17 @@
+﻿  CameraCalibration.cpp
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+CameraCalibration.cpp(68): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+  SoloCalibration.cpp
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+SoloCalibration.cpp(43): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+  正在生成代码
+  All 477 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  CameraCalibration.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Release\CameraCalibration.exe
+  CameraCalibration.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Release\CameraCalibration.pdb (Full PDB)

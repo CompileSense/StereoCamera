@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/linux/FaceAlignment/LBF_api.h
+iostream
+-
+opencv2/opencv.hpp
+-
+
+/home/linux/FaceAlignment/test/opencv-detection/detection.cpp
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+opencv2/core/core.hpp
+-
+opencv2/objdetect/objdetect.hpp
+-
+vector
+-
+iostream
+-
+../../LBF_api.h
+/home/linux/FaceAlignment/LBF_api.h
+

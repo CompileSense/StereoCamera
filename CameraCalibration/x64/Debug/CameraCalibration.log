@@ -1,8 +1,2 @@
-﻿  CameraCalibration.cpp
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\projects\multcamera\stereo\stereocamera\cameracalibration\cameracalibration.cpp(68): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
-  CameraCalibration.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Debug\CameraCalibration.exe
+﻿  CameraCalibration.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Debug\CameraCalibration.exe
   CameraCalibration.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Debug\CameraCalibration.pdb (Partial PDB)

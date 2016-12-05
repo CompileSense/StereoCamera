@@ -1,8 +1,7 @@
 ﻿  StereoMatch.cpp
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\opencv\opencv3.0\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-d:\work\projects\multcamera\stereo\stereocamera\stereocamera\stereomatch.cpp(44): warning C4305: “初始化”: 从“double”到“float”截断
+d:\work\opencv3.1\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\work\opencv3.1\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\work\opencv3.1\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\work\opencv3.1\opencv\build\include\opencv2\core\utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   StereoCamera.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Debug\StereoCamera.exe
   StereoCamera.vcxproj -> D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\x64\Debug\StereoCamera.pdb (Partial PDB)

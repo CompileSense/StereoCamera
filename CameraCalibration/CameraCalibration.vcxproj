@@ -72,6 +72,10 @@
     <IncludePath>D:\Work\OPENCV\opencv3.0\opencv\build\include;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Work\OPENCV\opencv3.0\opencv\build\x64\vc12\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\Work\OPENCV\opencv3.0\opencv\build\include;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Work\OPENCV\opencv3.0\opencv\build\x64\vc12\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -113,6 +117,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opencv_ts300.lib;opencv_world300.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

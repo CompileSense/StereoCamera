@@ -15,7 +15,7 @@ const int imageHeight = 480;
 const int boardWidth = 7;                               //横向的角点数目  
 const int boardHeight = 5;                              //纵向的角点数据  
 const int boardCorner = boardWidth * boardHeight;       //总的角点数据  
-const int frameNumber = 5;                             //相机标定时需要采用的图像张数  
+const int frameNumber = 14;                             //相机标定时需要采用的图像张数  
 const int squareSize = 35;                              //标定板黑白格子的大小 单位mm  
 const Size boardSize = Size(boardWidth, boardHeight);   //  
 Size imageSize = Size(imageWidth, imageHeight);
@@ -47,10 +47,10 @@ Mat distCoeffR ;
 //读取标定矩阵函数
 void ReadCameraparam(void)
 {
-	FileStorage as("../StereoCamera/data/CameraIntrinsicsL.yml", FileStorage::READ);
+	FileStorage as("..\\StereoCamera\\data\\CameraIntrinsicsL.yml", FileStorage::READ);
 	as["cameraMatrixL"] >> cameraMatrixL;
 	as["distCoeffL"] >> distCoeffL;
-	FileStorage bs("../StereoCamera/data/CameraIntrinsicsR.yml", FileStorage::READ);
+	FileStorage bs("..\\StereoCamera\\data\\CameraIntrinsicsR.yml", FileStorage::READ);
 	bs["cameraMatrixR"] >> cameraMatrixR;
 	bs["distCoeffR"] >> distCoeffR;
 }
@@ -78,7 +78,7 @@ void outputCameraParam(void)
 {
 	/*保存数据*/
 	/*输出数据*/
-	FileStorage fs("../StereoCamera/data/intrinsics.yml", FileStorage::WRITE);
+	FileStorage fs("..\\StereoCamera\\data\\intrinsics.yml", FileStorage::WRITE);
 	if (fs.isOpened())
 	{
 		fs << "cameraMatrixL" << cameraMatrixL << "cameraDistcoeffL" << distCoeffL << "cameraMatrixR" << cameraMatrixR << "cameraDistcoeffR" << distCoeffR;
@@ -90,7 +90,7 @@ void outputCameraParam(void)
 		cout << "Error: can not save the intrinsics!!!!!" << endl;
 	}
 
-	fs.open("../StereoCamera/data/extrinsics.yml", FileStorage::WRITE);
+	fs.open("..\\StereoCamera\\data\\extrinsics.yml", FileStorage::WRITE);
 	if (fs.isOpened())
 	{
 		fs << "R" << R << "T" << T << "Rl" << Rl << "Rr" << Rr << "Pl" << Pl << "Pr" << Pr << "Q" << Q;
@@ -104,7 +104,7 @@ void outputCameraParam(void)
 int main()
 {
 	//分别调试左右摄像头
-	SoloCalibration();
+	//SoloCalibration();
 	ReadCameraparam();
 	bool isFindL, isFindR;
 

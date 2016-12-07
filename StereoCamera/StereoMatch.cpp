@@ -1,7 +1,7 @@
 //双目匹配
-//版本:Version 3.1.1
+//版本:Version 3.2.1
 //利用双目标定文件对双目摄像头所采得的画面进行匹配并能够输出图像世界坐标
-//加入特征点提取项目
+//加入特征点提取项目并能够输出三维特征点至68point.txt
 //备注：需自行添加模型库和训练结果
 
 #include "opencv2/calib3d/calib3d.hpp"
@@ -35,7 +35,7 @@ static void saveXYZ(const char* filename, const Mat& mat)
 	fclose(fp);
 }
 
-void detectAndDraw(Mat& inputimg,Mat& dirimg,CascadeClassifier& cascade,
+Mat detectAndDraw(Mat& inputimg,Mat& dirimg,Mat& depthimg,CascadeClassifier& cascade,
 	CascadeClassifier& nestedCascade,
 	double scale, bool tryflip)
 {
@@ -107,15 +107,25 @@ void detectAndDraw(Mat& inputimg,Mat& dirimg,CascadeClassifier& cascade,
 		detectKeyPoints(smallImgROI, landmarks);
 		vector<Point2f>::iterator p_point = landmarks.begin();
 		//cout << landmarks << endl;
+		
+		const double max_z = 80;
+		FILE* fp = fopen("68points.txt", "wt");
+
 		while (p_point != landmarks.end())
 		{
 			center.x = cvRound((r->x + p_point->x)*scale);
 			center.y = cvRound((r->y + p_point->y)*scale);
 			circle(dirimg, center, 3, color, 1, 8, 0);
 			p_point++;
+			imshow("depth", depthimg);
+			imshow("face", inputimg);
+			Vec3f point = depthimg.at<Vec3f>(center.y, center.x);
+			//if (fabs(point[2] - max_z) < FLT_EPSILON || fabs(point[2]) > max_z) continue;
+			fprintf(fp, "%f %f %f\n", point[0], point[1], point[2]);
 		}
+		fclose(fp);
 	}
-	cv::imshow("result", dirimg);
+	return dirimg;
 }
 
 int main()
@@ -166,7 +176,7 @@ int main()
 
 	Ptr<StereoSGBM> sgbm = StereoSGBM::create(0, 16, 3);
 
-	Mat left, right;
+	Mat left, right,result,xyz;
 	//打开左摄像头
 	VideoCapture capleft(1);
 	//打开右摄像头
@@ -191,11 +201,10 @@ int main()
 		resize(right, canvasPart, canvasPart.size(), 0, 0, INTER_LINEAR);
 
 		imshow("Capture", canvas);
-
+		
+		//缩小一倍增加检测速度
 		resize(left, img1, left.size() / 2, 0, 0, INTER_AREA);
 		resize(right, img2, right.size() / 2, 0, 0, INTER_LINEAR);
-		//img1 = left;
-		//img2 = right;
 		Size img_size = img1.size();
 
 		//对两个摄像头所采得的画面进行矫正
@@ -238,18 +247,18 @@ int main()
 		//medianBlur(disp, disp, 9);
 		t = getTickCount() - t;
 		cout << "Time elapsed: " << t * 1000 / getTickFrequency() << "ms" << endl;
-
+		
 		//disp = dispp.colRange(numberOfDisparities, img1p.cols);
 		disp.convertTo(disp8, CV_8U, 255 / (numberOfDisparities*16.));
-		resize(disp8, disp8, canvasPart.size() * 2, 0, 0, INTER_LINEAR);
+
 		imshow("Deepwindow", disp8);
-		detectAndDraw(left,disp8, cascade, nestedCascade, 2, 0);
+		
+		reprojectImageTo3D(disp, xyz, Q, true);
+		result = detectAndDraw(img1, disp8, xyz, cascade, nestedCascade, 1, 0);
+		imshow("Result", result);
 		if (cvWaitKey(10) == 'w')
 		{
-
 			printf("storing the point cloud...");
-			Mat xyz;
-			reprojectImageTo3D(disp, xyz, Q, true);
 			saveXYZ("pointcloud.txt", xyz);
 			printf("\n");
 		};

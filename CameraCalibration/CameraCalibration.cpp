@@ -15,7 +15,7 @@ const int imageHeight = 480;
 const int boardWidth = 7;                               //横向的角点数目  
 const int boardHeight = 5;                              //纵向的角点数据  
 const int boardCorner = boardWidth * boardHeight;       //总的角点数据  
-const int frameNumber = 14;                             //相机标定时需要采用的图像张数  
+const int frameNumber = 20;                             //相机标定时需要采用的图像张数  
 const int squareSize = 35;                              //标定板黑白格子的大小 单位mm  
 const Size boardSize = Size(boardWidth, boardHeight);   //  
 Size imageSize = Size(imageWidth, imageHeight);
@@ -104,7 +104,7 @@ void outputCameraParam(void)
 int main()
 {
 	//分别调试左右摄像头
-	//SoloCalibration();
+	SoloCalibration();
 	ReadCameraparam();
 	bool isFindL, isFindR;
 
@@ -308,7 +308,7 @@ int main()
 		cvRound(validROIL.width*sf_), cvRound(validROIL.height*sf_));
 	rectangle(canvasPart_, vroiL, Scalar(0, 0, 200), 3, 8);                      //画上一个矩形  
 
-	cout << "Painted ImageL" << endl;
+	//cout << "Painted ImageL" << endl;
 
 	//右图像画到画布上
 	canvasPart_ = canvas_(Rect(w_, 0, w_, h_));                                      //获得画布的另一部分  
@@ -317,11 +317,11 @@ int main()
 		cvRound(validROIR.width * sf_), cvRound(validROIR.height * sf_));
 	rectangle(canvasPart_, vroiR, Scalar(0, 159, 0), 3, 8);
 
-	cout << "Painted ImageR" << endl;
+	//cout << "Painted ImageR" << endl;
 
 	//画上对应的线条
 	for (int i = 0; i < canvas_.rows;i += 16)
-		line(canvas_, Point(0, i), Point(canvas_.cols, i), Scalar(0, 200, 0), 1, 8);
+	line(canvas_, Point(0, i), Point(canvas_.cols, i), Scalar(0, 200, 0), 1, 8);
 
 	imshow("Rectified", canvas_);
 

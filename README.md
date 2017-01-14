@@ -1,14 +1,25 @@
 ﻿# StereoCamera
 双目摄像头标定以及深度匹配
 
-- **依赖库** ：*OpenCV3.0*(x64)：http://opencv.org/downloads.html
-
+- **依赖库** ：
+- *OpenCV3.0*(x64)：http://opencv.org/downloads.html
+- *OpenGL4.4*(x64)：https://opengl.en.softonic.com  
+- *LBF_landmark*：已包含于项目中
 ### 代码块
 - StereoCamera：SGBM双目摄像头深度匹配
 - CameraCalibration：双目摄像头标定程序
+-------------------
+##使用说明：
+- 1.为项目添加相应依赖库
+- 2.修改LBF训练模型的读取位置
+- 3.使用CameraCalibration代码块对双目摄像头进行标定
+- 4.run
 
 -------------------
 ### 更新记录
+
+#### v3.3.1 ：
+-   1.在OPENGL窗口中实时分类显示三维特征点
 
 #### v3.2.1 ：
 -   1.加入深度点云与68个特征点匹配算法，输出至68point.txt（文件名及类型可在函数中修改）

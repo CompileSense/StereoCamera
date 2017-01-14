@@ -73,7 +73,7 @@
     <LibraryPath>D:\Work\OPENCV3.1\opencv\build\x64\vc14\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\Work\OPENCV\opencv3.0\opencv\build\include;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2;D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\include;D:\Work\OPENGL\Libraries\Include;D:\Work\OPENGL\SOIL;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Work\OPENCV\opencv3.0\opencv\build\include;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv;D:\Work\OPENCV\opencv3.0\opencv\build\include\opencv2;D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\include;D:\Work\OPENGL\Libraries\Include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Work\OPENCV\opencv3.0\opencv\build\x64\vc12\lib;D:\Work\Projects\multcamera\STEREO\StereoCamera\StereoCamera\LIB;D:\Work\OPENGL\Libraries\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -113,11 +113,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opencv_ts300.lib;opencv_world300.lib;Project1.lib;opengl32.lib;glfw3.lib;glew32s.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_ts300.lib;opencv_world300.lib;Project1.lib;opengl32.lib;glut64.lib;libfacedetect-x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

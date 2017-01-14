@@ -5,10 +5,12 @@
 - *OpenCV3.0*(x64)：http://opencv.org/downloads.html
 - *OpenGL4.4*(x64)：https://opengl.en.softonic.com  
 - *LBF_landmark*：已包含于项目中
+
 -------------------
 ###代码块
 - StereoCamera：SGBM双目摄像头深度匹配
 - CameraCalibration：双目摄像头标定程序
+
 -------------------
 ##使用说明：
 - 1.为项目添加相应依赖库
